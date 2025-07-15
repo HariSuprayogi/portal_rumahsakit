@@ -1,9 +1,14 @@
 @extends('front.layout.main_front')
 @section('content')
 
+
 <div class="container mt-5">
     <h1 class="mb-4">Formulir Pendaftaran</h1>
-
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
     <form method="POST">
         @csrf
 

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\InformasiKamar;
 
 class HomeController extends Controller
 {
     public function index()
-    {
-        return view('front/home');
-    }
+{
+    $data = InformasiKamar::all();
+    return view('front.home', compact('data'));
+}
 
     /**
      * Show the form for creating a new resource.

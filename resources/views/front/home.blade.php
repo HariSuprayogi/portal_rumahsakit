@@ -3,26 +3,92 @@
 @section('content')
 
 <div class="container mt-4">
-    <h1 class="text-center mb-5">PORTAL BERITA KEPULAUAN MERANTI</h1>
+    <h1 class="text-center mb-5">PORTAL RSUD KEPULAUAN MERANTI</h1>
 
     <div class="card mb-4">
         <div class="card-header bg-primary text-white">
             Informasi PORTAL BERITA KEPULAUAN MERANTI
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <p><strong>Nama Rumah Sakit:</strong> RS Sehat Selalu</p>
-                    <p><strong>Alamat:</strong> Jl. Melati No. 10, Pekanbaru</p>
-                    <p><strong>Nomor Telepon:</strong> (0761) 123456</p>
-                    <p><strong>Email:</strong> info@rssehatselalu.com</p>
+    <div class="card-body">
+        <div class="row align-items-center">
+            <!-- Slide Teks Informasi Kamar -->
+            <div class="col-md-6 pe-md-4 border-end">
+                <div id="textCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div id="textCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+  
+    <h4 class="mb-4 text-center">Informasi Ketersediaan Kamar</h4>
+
+    <div id="kamarCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+
+            @foreach($data as $index => $kamar)
+                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                    <div class="card shadow mx-auto" style="max-width: 600px;">
+                        <div class="card-header text-white fw-bold" style="background-color: #0d6efd;">
+                            {{ $kamar->nama_kamar }}
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-borderless mb-0">
+                                <tr>
+                                    <td class="w-50">Kelas Kamar</td>
+                                    <td>: {{ $kamar->tipe_kamar }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Jumlah Kamar</td>
+                                    <td>: {{ $kamar->jumlah_kamar }} Kamar</td>
+                                </tr>
+                                <tr>
+                                    <td>Terpakai</td>
+                                    <td>: {{ $kamar->terpakai }} Kamar</td>
+                                </tr>
+                                <tr>
+                                    <td>Ketersediaan</td>
+                                    <td>: {{ $kamar->jumlah_kamar - $kamar->terpakai }} Kamar</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>
+                                        :
+                                        @if($kamar->status == 'Tersedia')
+                                            <span class="badge bg-success px-3 py-2">Tersedia</span>
+                                        @else
+                                            <span class="badge bg-danger px-3 py-2">Penuh</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <img src="{{ asset('img/gedung1.png') }}" alt="Gambar Rumah Sakit" class="img-fluid rounded shadow-sm">
+            @endforeach
+
+        </div>
+
+        <!-- Navigasi Carousel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#kamarCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#kamarCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>
+
+                    <!-- Tombol Navigasi -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#textCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#textCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <!-- Slide Gambar Rumah Sakit -->
+            <div class="col-md-6">
+    <img src="{{ asset('img/slide2.png') }}" alt="Gambar Rumah Sakit" class="img-fluid rounded shadow-sm">
+</div>
+
 
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
         <div class="col">
@@ -41,7 +107,7 @@
                     <i class="bi bi-list-check text-success fs-2 mb-2"></i>
                     <h5 class="card-title">Jadwal Dokter</h5>
                     <p class="card-text">Informasi lengkap mengenai jadwal praktik dokter spesialis.</p>
-                    <a href="{{ url('jadwal-dokter') }}" class="btn btn-success btn-sm">Lihat Jadwal</a>
+                    <a href="{{ route('front.jadwal_dokter.index') }}" class="btn btn-success btn-sm">Lihat Jadwal</a>
                 </div>
             </div>
         </div>
@@ -51,7 +117,7 @@
                     <i class="bi bi-hospital-fill text-info fs-2 mb-2"></i>
                     <h5 class="card-title">Informasi Kamar</h5>
                     <p class="card-text">Ketersediaan dan status kamar rawat inap.</p>
-                    <a href="{{ url('kamar.index') }}" class="btn btn-info btn-sm">Lihat Ketersediaan</a>
+                    <a href="{{ route('front.informasi_kamar.index') }}" class="btn btn-info btn-sm">Lihat Ketersediaan</a>
                 </div>
             </div>
         </div>

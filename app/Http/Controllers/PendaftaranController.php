@@ -37,7 +37,7 @@ class PendaftaranController extends Controller
         $pendaftaran->telepon=$request->telepon;
         $pendaftaran->email=$request->email;
         $pendaftaran->save();
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
+        return redirect()->back()->with('status', 'Data Berhasil Disimpan !!!');
     }
 
     /**
